@@ -50,34 +50,34 @@ dependencies {
    testImplementation(libs.junit)
    androidTestImplementation(libs.androidx.junit)
    androidTestImplementation(libs.androidx.espresso.core)
-   implementation("androidx.activity:activity-ktx:1.9.3")
+   implementation(libs.androidx.activity.ktx)
 
    // Dagger Hilt
-   implementation("com.google.dagger:hilt-android:2.49")
-   ksp("com.google.dagger:dagger-compiler:2.49")
-   ksp("com.google.dagger:hilt-compiler:2.49")
+   implementation(libs.hilt.android)
+   ksp(libs.dagger.compiler)
+   ksp(libs.hilt.compiler)
 
    //SplashScreen
-   implementation ("androidx.core:core-splashscreen:1.0.1")
+   implementation (libs.androidx.core.splashscreen)
 
    // Retrofit
-   implementation("com.squareup.retrofit2:retrofit:2.9.0")
-   implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+   implementation(libs.retrofit)
+   implementation(libs.converter.gson)
 
    // OkHttp and Chucker
-   implementation("com.squareup.okhttp3:okhttp:4.12.0")
-   debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
-   releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+   implementation(libs.okhttp)
+   debugImplementation(libs.library)
+   releaseImplementation(libs.library.no.op)
 
    // Coroutines
-   implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+   implementation (libs.kotlinx.coroutines.android)
 
    // Lifecycle
-   implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-   implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+   implementation(libs.androidx.lifecycle.viewmodel.ktx)
+   implementation(libs.androidx.lifecycle.livedata.ktx)
+   implementation(libs.androidx.lifecycle.runtime.ktx)
 
    // Glide
-   implementation("com.github.bumptech.glide:glide:4.16.0")
-   annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+   implementation(libs.glide)
+   annotationProcessor(libs.compiler)
 }
