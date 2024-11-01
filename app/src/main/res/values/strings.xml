@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Storyou</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello">Hello 👋🏻</string>
+    <string name="please_regist_yourself_to_cotinue">Please, regist yourself to continue.</string>
+    <string name="your_name">Your Name</string>
+    <string name="minimum_length_is_8_characters">Minimum length is 8 characters</string>
+    <string name="email_example_com">email@example.com</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="or_if_you_already_have_an_account">Or if you already have an account</string>
+    <string name="or_if_you_don_t_have_an_account">Or if you don\'t have an account</string>
+    <string name="please_login_to_continue">Please, login to continue.</string>
+    <string name="welcome_back">Welcome back 👋🏻</string>
+    <string name="let_s_write_a_story">Let\'s write a story ✏️</string>
+    <string name="subtitle">Capture moments and create memories through storytelling.</string>
+    <string name="detail_post">Detail Post</string>
+    <string name="logout">Logout</string>
+    <string name="feed">Feed</string>
 </resources>

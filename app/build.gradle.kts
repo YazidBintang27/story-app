@@ -3,6 +3,7 @@ plugins {
    alias(libs.plugins.kotlin.android)
    id("com.google.devtools.ksp")
    id("com.google.dagger.hilt.android")
+   id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -80,4 +81,11 @@ dependencies {
    // Glide
    implementation(libs.glide)
    annotationProcessor(libs.compiler)
+
+   // Jetpack Navigation
+   implementation(libs.androidx.navigation.fragment.ktx)
+   implementation(libs.androidx.navigation.ui.ktx)
+
+   // Datastore
+   implementation(libs.androidx.datastore.preferences)
 }
