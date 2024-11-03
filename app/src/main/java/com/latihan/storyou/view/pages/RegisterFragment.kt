@@ -115,9 +115,15 @@ class RegisterFragment : Fragment() {
                         Log.d("RegisterFragment", "${response.message}")
                         binding.progressIndicator.visibility = View.GONE
                         if (response.error == false) {
-                           navController.navigate(R.id.action_registerFragment_to_loginFragment)
-                           Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
+                           try {
+                              navController.navigate(R.id.action_registerFragment_to_loginFragment)
+                           } catch (e: IllegalArgumentException) {
+                              Log.e("NavigateError", "${e.message}")
+                           } finally {
+                              Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
+                           }
                         } else {
+                           authViewModel.clearRegisterResponse()
                            Log.d("RegisterFragment", "${response.error}")
                            Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
                         }

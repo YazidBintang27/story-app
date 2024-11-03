@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -25,10 +26,14 @@ class AuthViewModel @Inject constructor(
    private val repository: Repository,
    private val authPreferences: AuthPreferences
 ): ViewModel() {
-   val loginResponse: StateFlow<LoginResponse?> = repository.loginResponse
 
    private var _registerResponse = MutableStateFlow<RegisterResponse?>(null)
    val registerResponse: StateFlow<RegisterResponse?> = _registerResponse.asStateFlow()
+
+   private var _loginResponse = MutableStateFlow<LoginResponse?>(null)
+   val loginResponse: StateFlow<LoginResponse?> = _loginResponse.asStateFlow()
+
+   val savedLoginResponse: Flow<LoginResponse?> = authPreferences.loginResponse
 
    val isLoggedIn: Flow<Boolean> = authPreferences.isLoggedIn
 
@@ -49,8 +54,32 @@ class AuthViewModel @Inject constructor(
    }
 
    fun login(email: String, password: String) {
-      viewModelScope.launch {
-        repository.login(email, password)
+      viewModelScope.launch(Dispatchers.IO) {
+         try {
+            val response = repository.login(email, password)
+            _loginResponse.value = response
+            Log.d("CheckLoginResponse", "ViewModel received response: ${response.loginResult?.userId}")
+            val saveLoginResponseJob = launch {
+               authPreferences.saveLoginResponse(response)
+               Log.d("CheckLoginResponse", "Login response saved successfully.")
+            }
+            saveLoginResponseJob.join()
+            response.loginResult?.token?.let { token ->
+               Log.d("CheckToken", "Saving token: $token")
+               authPreferences.saveAuthToken(token)
+               Log.d("CheckToken", "Token saved successfully.")
+            }
+         } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse = errorBody?.let {
+               Gson().fromJson(it, LoginResponse::class.java)
+            } ?: LoginResponse(error = true, message = "Unknown error", loginResult = null)
+            _loginResponse.value = errorResponse
+            Log.e("LoginError", "HTTP error: ${e.message}")
+         } catch (e: Exception) {
+            Log.e("LoginError", "Unexpected error: ${e.localizedMessage}")
+            _loginResponse.value = LoginResponse(error = true, message = "Unexpected error", loginResult = null)
+         }
       }
    }
 
@@ -59,5 +88,13 @@ class AuthViewModel @Inject constructor(
          authPreferences.clearSession()
          Log.d("Logout", "${isLoggedIn.collectLatest {  }}")
       }
+   }
+
+   fun clearLoginResponse() {
+      _loginResponse.value = null
+   }
+
+   fun clearRegisterResponse() {
+      _registerResponse.value = null
    }
 }

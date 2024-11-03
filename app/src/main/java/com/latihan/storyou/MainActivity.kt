@@ -1,12 +1,9 @@
 package com.latihan.storyou
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
@@ -38,10 +35,6 @@ class MainActivity : AppCompatActivity() {
             else -> bottomNavView.visibility = View.GONE
          }
       }
-//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//         installSplashScreen()
-//         navController.navigate(R.id.homeFragment)
-//      }
       bottomNavView.setupWithNavController(navController)
    }
 

@@ -107,13 +107,24 @@ class LoginFragment : Fragment() {
                binding.progressIndicator.visibility = View.VISIBLE
                authViewModel.login(email, password)
                authViewModel.loginResponse.collectLatest { response ->
+                  Log.d("CheckResponse", "Response start: ${response?.message}")
                   response?.let {
                      val message = response.message
+                     Log.d("CheckResponse", "Response after pass to variable: ${response.message}")
                      binding.progressIndicator.visibility = View.GONE
                      if (response.error == false) {
-                        navController.navigate(R.id.action_loginFragment_to_homeFragment)
-                        Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
+                        try {
+                           navController.navigate(R.id.action_loginFragment_to_homeFragment)
+                           Log.d("CheckNavigationLogin", "Ini harusnya tidak diakses karena response" +
+                                 " error true")
+                        } catch (e: IllegalArgumentException) {
+                           Log.e("Navigate error", "${e.message}")
+                        } finally {
+                           Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
+                        }
                      } else {
+                        authViewModel.clearLoginResponse()
+                        Log.d("CheckNavigationLogin", "Ini yang diakses jika response error true")
                         Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
                      }
                   }
