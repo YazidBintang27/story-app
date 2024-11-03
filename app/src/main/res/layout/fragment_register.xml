@@ -75,7 +75,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         app:startIconDrawable="@drawable/mail_at_sign_01_stroke_rounded"
-        app:endIconMode="clear_text"
         app:errorEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_input_layout"
@@ -97,7 +96,6 @@
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         app:startIconDrawable="@drawable/square_lock_02_stroke_rounded"
-        app:endIconMode="password_toggle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_input_layout"
         app:hintEnabled="false">
