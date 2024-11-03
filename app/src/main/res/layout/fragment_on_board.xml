@@ -28,6 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logo"
+        android:alpha="0"
+        tools:alpha="1"
         android:fontFamily="@font/opensans_bold"
         android:textSize="22sp" />
 
@@ -42,6 +44,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_welcome"
         android:fontFamily="@font/opensans_medium"
+        android:alpha="0"
+        tools:alpha="1"
         android:textSize="18sp" />
 
     <com.google.android.material.button.MaterialButton
@@ -55,6 +59,8 @@
         android:textSize="16sp"
         android:fontFamily="@font/opensans_semibold"
         app:cornerRadius="12dp"
+        android:alpha="0"
+        tools:alpha="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_navigate_login" />
 
@@ -67,6 +73,8 @@
         android:backgroundTint="@color/indicator_color"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:alpha="0"
+        tools:alpha="1"
         android:fontFamily="@font/opensans_semibold"
         app:cornerRadius="12dp"
         app:layout_constraintStart_toStartOf="parent"

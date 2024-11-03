@@ -1,5 +1,7 @@
 package com.latihan.storyou.view.pages
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,12 +36,36 @@ class OnBoardFragment : Fragment(), View.OnClickListener {
       navController = Navigation.findNavController(view)
       binding.btnNavigateLogin.setOnClickListener(this)
       binding.btnNavigateRegister.setOnClickListener(this)
+      playAnimation()
    }
 
    override fun onClick(v: View?) {
       when (v?.id) {
          R.id.btn_navigate_register -> navController.navigate(R.id.action_onBoardFragment_to_registerFragment)
          R.id.btn_navigate_login -> navController.navigate(R.id.action_onBoardFragment_to_loginFragment)
+      }
+   }
+
+   private fun playAnimation() {
+      ObjectAnimator.ofFloat(binding.ivLogo, View.TRANSLATION_X, -30f, 30f).apply {
+         duration = 4000
+         repeatCount = ObjectAnimator.INFINITE
+         repeatMode = ObjectAnimator.REVERSE
+      }.start()
+
+      val title = ObjectAnimator.ofFloat(binding.tvWelcome, View.ALPHA, 1f).setDuration(300)
+      val subtitle = ObjectAnimator.ofFloat(binding.tvSubtitle, View.ALPHA, 1f).setDuration(300)
+      val register = ObjectAnimator.ofFloat(binding.btnNavigateRegister, View.ALPHA, 1f)
+         .setDuration(400)
+      val login = ObjectAnimator.ofFloat(binding.btnNavigateLogin, View.ALPHA, 1f).setDuration(400)
+
+      val together = AnimatorSet().apply {
+         playTogether(register, login)
+      }
+
+      AnimatorSet().apply {
+         playSequentially(title, subtitle, together)
+         start()
       }
    }
 

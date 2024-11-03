@@ -1,5 +1,6 @@
 package com.latihan.storyou.view.pages
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -43,8 +44,9 @@ class SplashFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
       navController = Navigation.findNavController(view)
+      playAnimation()
       viewLifecycleOwner.lifecycleScope.launch {
-         delay(3000)
+         delay(4000)
          authViewModel.isLoggedIn.collectLatest { response ->
             Log.d("Splash", "$response")
             if (response) {
@@ -56,6 +58,14 @@ class SplashFragment : Fragment() {
             }
          }
       }
+   }
+
+   private fun playAnimation() {
+      ObjectAnimator.ofFloat(binding.ivLogo, View.TRANSLATION_X, -30f, 30f).apply {
+         duration = 2000
+         repeatCount = ObjectAnimator.INFINITE
+         repeatMode = ObjectAnimator.REVERSE
+      }.start()
    }
 
    override fun onDestroyView() {
