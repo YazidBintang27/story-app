@@ -2,19 +2,19 @@ package com.latihan.storyou.view.pages
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import com.latihan.storyou.R
 import com.latihan.storyou.databinding.FragmentProfileBinding
 import com.latihan.storyou.view.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -47,8 +47,10 @@ class ProfileFragment : Fragment() {
 
    private fun getData() {
       viewLifecycleOwner.lifecycleScope.launch {
-         authViewModel.loginResponse.collect { response ->
+         authViewModel.savedLoginResponse.collect { response ->
+            Log.d("CheckLoginResponse", " Profile before passing: ${response?.loginResult?.userId}")
             response?.loginResult?.let {
+               Log.d("CheckLoginResponse", "Profile after passing: ${response.loginResult.userId}")
                binding.tvName.text = response.loginResult.name
                binding.tvUserId.text = response.loginResult.userId
             }
@@ -62,6 +64,9 @@ class ProfileFragment : Fragment() {
          authViewModel.isLoggedIn.collect { loggedIn ->
             if (!loggedIn) {
                navController.navigate(R.id.action_profileFragment_to_onBoardFragment)
+               Snackbar.make(binding.root, "Logout Successful", Snackbar.LENGTH_SHORT).show()
+            } else {
+               Snackbar.make(binding.root, "Logout Failed", Snackbar.LENGTH_SHORT).show()
             }
          }
       }
