@@ -53,6 +53,23 @@
         android:textSize="16sp" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_change_language"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/change_language"
+        app:icon="@drawable/translate_stroke_rounded"
+        app:iconTint="@color/black"
+        app:iconGravity="textStart"
+        android:backgroundTint="@color/indicator_color"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/opensans_semibold"
+        app:cornerRadius="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/action_logout" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/action_logout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -63,6 +80,6 @@
         android:fontFamily="@font/opensans_semibold"
         app:cornerRadius="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_id" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

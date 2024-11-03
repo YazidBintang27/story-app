@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storyou</string>
+    <string name="hello">Halo 👋🏻</string>
+    <string name="please_regist_yourself_to_cotinue">Silakan daftar diri Anda untuk melanjutkan.</string>
+    <string name="your_name">Nama Anda</string>
+    <string name="minimum_length_is_8_characters">Panjang minimal adalah 8 karakter</string>
+    <string name="email_example_com">email@contoh.com</string>
+    <string name="register">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="or_if_you_already_have_an_account">Atau jika Anda sudah memiliki akun</string>
+    <string name="or_if_you_don_t_have_an_account">Atau jika Anda belum memiliki akun</string>
+    <string name="please_login_to_continue">Silakan masuk untuk melanjutkan.</string>
+    <string name="welcome_back">Selamat datang kembali 👋🏻</string>
+    <string name="let_s_write_a_story">Ayo tulis cerita ✏️</string>
+    <string name="subtitle">Tangkap momen dan buat kenangan melalui bercerita.</string>
+    <string name="detail_post">Detail Postingan</string>
+    <string name="logout">Keluar</string>
+    <string name="feed">Beranda</string>
+    <string name="post">Posting</string>
+    <string name="from_camera">Dari Kamera</string>
+    <string name="from_gallery">Dari Galeri</string>
+    <string name="tell_your_story">Ceritakan kisah Anda</string>
+    <string name="add_post">Tambah Postingan</string>
+    <string name="created_by_yazid">Dibuat oleh Yazid⭐</string>
+    <string name="change_language">Ubah Bahasa</string>
+</resources>

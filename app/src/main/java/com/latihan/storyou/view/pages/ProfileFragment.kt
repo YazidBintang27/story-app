@@ -1,6 +1,8 @@
 package com.latihan.storyou.view.pages
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +45,7 @@ class ProfileFragment : Fragment() {
       navController = Navigation.findNavController(view)
       getData()
       binding.actionLogout.setOnClickListener { logout() }
+      changeLanguage()
    }
 
    private fun getData() {
@@ -70,6 +73,12 @@ class ProfileFragment : Fragment() {
                Snackbar.make(binding.root, "Logout Failed", Snackbar.LENGTH_SHORT).show()
             }
          }
+      }
+   }
+
+   private fun changeLanguage() {
+      binding.actionChangeLanguage.setOnClickListener {
+         startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
       }
    }
 

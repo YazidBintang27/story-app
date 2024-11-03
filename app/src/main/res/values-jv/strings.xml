@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Storyou</string>
+    <string name="hello">こんにちは 👋🏻</string>
+    <string name="please_regist_yourself_to_cotinue">続行するには登録してください。</string>
+    <string name="your_name">あなたの名前</string>
+    <string name="minimum_length_is_8_characters">最小長は8文字です</string>
+    <string name="email_example_com">メール@example.com</string>
+    <string name="register">登録</string>
+    <string name="login">ログイン</string>
+    <string name="or_if_you_already_have_an_account">すでにアカウントをお持ちの場合</string>
+    <string name="or_if_you_don_t_have_an_account">アカウントをお持ちでない場合</string>
+    <string name="please_login_to_continue">続行するにはログインしてください。</string>
+    <string name="welcome_back">お帰りなさい 👋🏻</string>
+    <string name="let_s_write_a_story">ストーリーを書きましょう ✏️</string>
+    <string name="subtitle">物語を通して瞬間を捉え、思い出を作りましょう。</string>
+    <string name="detail_post">投稿の詳細</string>
+    <string name="logout">ログアウト</string>
+    <string name="feed">フィード</string>
+    <string name="post">投稿</string>
+    <string name="from_camera">カメラから</string>
+    <string name="from_gallery">ギャラリーから</string>
+    <string name="tell_your_story">あなたの物語を伝えましょう</string>
+    <string name="add_post">投稿を追加</string>
+    <string name="created_by_yazid">Yazidによって作成されました⭐</string>
+    <string name="change_language">言語を変更する</string>
+</resources>
