@@ -26,7 +26,7 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <ImageView
-        android:id="@+id/iv_photo"
+        android:id="@+id/iv_detail_photo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="Photo"
@@ -38,11 +38,11 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_photo"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_photo"
         android:layout_margin="16dp"
         tools:text="Yazid Bintang"
         android:maxLines="1"
@@ -51,27 +51,26 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_detail_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_photo"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_photo"
         android:layout_margin="16dp"
         tools:text="30 October 2024"
         android:maxLines="1"
         android:ellipsize="end"
         android:fontFamily="@font/opensans_medium"
-        app:layout_constraintBaseline_toBaselineOf="@id/tv_name"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_detail_name"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/tv_description"
+        android:id="@+id/tv_detail_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         android:fontFamily="@font/opensans_semibold"
         android:textSize="16sp" />

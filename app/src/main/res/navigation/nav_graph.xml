@@ -105,7 +105,11 @@
         android:id="@+id/detailFragment"
         android:name="com.latihan.storyou.view.pages.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.latihan.storyou.view.pages.CameraFragment"

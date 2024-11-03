@@ -1,7 +1,5 @@
 package com.latihan.storyou.data.repository
 
-import android.util.Log
-import com.google.gson.Gson
 import com.latihan.storyou.data.local.datastore.AuthPreferences
 import com.latihan.storyou.data.remote.models.DetailStoryResponse
 import com.latihan.storyou.data.remote.models.LoginResponse
@@ -9,13 +7,8 @@ import com.latihan.storyou.data.remote.models.PostResponse
 import com.latihan.storyou.data.remote.models.RegisterResponse
 import com.latihan.storyou.data.remote.models.StoriesResponse
 import com.latihan.storyou.data.remote.service.ApiService
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -56,7 +49,7 @@ class RepositoryImpl @Inject constructor(
       return apiService.getAllStories(authHeader)
    }
 
-   override suspend fun getDetailStories(token: String, id: Int): DetailStoryResponse {
+   override suspend fun getDetailStories(token: String, id: String): DetailStoryResponse {
       val authHeader = "Bearer $token"
       return apiService.getDetailStories(authHeader, id)
    }

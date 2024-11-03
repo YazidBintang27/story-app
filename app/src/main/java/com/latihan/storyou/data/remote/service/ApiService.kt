@@ -60,6 +60,6 @@ interface ApiService {
    @GET(ApiConstant.DETAIL_STORIES_ENDPOINT)
    suspend fun getDetailStories(
       @Header("Authorization") token: String,
-      @Path("id") id: Int
+      @Path("id") id: String
    ): DetailStoryResponse
 }
