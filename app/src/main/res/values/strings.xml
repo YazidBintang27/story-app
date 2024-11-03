@@ -18,4 +18,9 @@
     <string name="detail_post">Detail Post</string>
     <string name="logout">Logout</string>
     <string name="feed">Feed</string>
+    <string name="post">Post</string>
+    <string name="from_camera">From Camera</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="tell_your_story">Tell your story</string>
+    <string name="add_post">Add Post</string>
 </resources>

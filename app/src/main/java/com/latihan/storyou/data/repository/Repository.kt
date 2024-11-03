@@ -11,7 +11,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 interface Repository {
-   val loginResponse: StateFlow<LoginResponse?>
    suspend fun register(
       name: String,
       email: String,
@@ -21,7 +20,7 @@ interface Repository {
    suspend fun login(
       email: String,
       password: String
-   )
+   ): LoginResponse
 
    suspend fun postStories(
       token: String,
@@ -40,5 +39,5 @@ interface Repository {
 
    suspend fun getAllStories(token: String): StoriesResponse
 
-   suspend fun getDetailStories(token: String): DetailStoryResponse
+   suspend fun getDetailStories(token: String, id: Int): DetailStoryResponse
 }

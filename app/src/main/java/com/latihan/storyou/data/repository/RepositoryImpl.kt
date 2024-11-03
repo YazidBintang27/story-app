@@ -1,5 +1,6 @@
 package com.latihan.storyou.data.repository
 
+import android.util.Log
 import com.google.gson.Gson
 import com.latihan.storyou.data.local.datastore.AuthPreferences
 import com.latihan.storyou.data.remote.models.DetailStoryResponse
@@ -22,27 +23,12 @@ class RepositoryImpl @Inject constructor(
    private val authPreferences: AuthPreferences
 ): Repository {
 
-   private var _loginResponse = MutableStateFlow<LoginResponse?>(null)
-   override val loginResponse: StateFlow<LoginResponse?> = _loginResponse.asStateFlow()
-
    override suspend fun register(name: String, email: String, password: String): RegisterResponse {
       return apiService.register(name, email, password)
    }
 
-   override suspend fun login(email: String, password: String) {
-      try {
-         val response = apiService.login(email, password)
-         _loginResponse.value = response
-         response.loginResult?.token?.let { token ->
-            authPreferences.saveAuthToken(token)
-         }
-      } catch (e: HttpException) {
-         val errorBody = e.response()?.errorBody()?.string()
-         val errorResponse = errorBody?.let {
-            Gson().fromJson(it, LoginResponse::class.java)
-         } ?: LoginResponse(error = true, message = "Unknown error", loginResult = null)
-         _loginResponse.value = errorResponse
-      }
+   override suspend fun login(email: String, password: String): LoginResponse {
+      return apiService.login(email, password)
    }
 
    override suspend fun postStories(
@@ -70,8 +56,8 @@ class RepositoryImpl @Inject constructor(
       return apiService.getAllStories(authHeader)
    }
 
-   override suspend fun getDetailStories(token: String): DetailStoryResponse {
+   override suspend fun getDetailStories(token: String, id: Int): DetailStoryResponse {
       val authHeader = "Bearer $token"
-      return apiService.getDetailStories(authHeader)
+      return apiService.getDetailStories(authHeader, id)
    }
 }

@@ -15,6 +15,7 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface ApiService {
    @FormUrlEncoded
@@ -37,7 +38,7 @@ interface ApiService {
    suspend fun postStories(
       @Header("Authorization") token: String,
       @Part("description") description: RequestBody,
-      @Part("photo") photo: MultipartBody.Part,
+      @Part photo: MultipartBody.Part,
       @Part("lat") lat: RequestBody? = null,
       @Part("lon") lon: RequestBody? = null
    ): PostResponse
@@ -46,7 +47,7 @@ interface ApiService {
    @POST(ApiConstant.ADD_STORIES_GUEST_ENDPOINT)
    suspend fun postStoriesGuest(
       @Part("description") description: RequestBody,
-      @Part("photo") photo: MultipartBody.Part,
+      @Part photo: MultipartBody.Part,
       @Part("lat") lat: RequestBody? = null,
       @Part("lon") lon: RequestBody? = null
    ): PostResponse
@@ -58,6 +59,7 @@ interface ApiService {
 
    @GET(ApiConstant.DETAIL_STORIES_ENDPOINT)
    suspend fun getDetailStories(
-      @Header("Authorization") token: String
+      @Header("Authorization") token: String,
+      @Path("id") id: Int
    ): DetailStoryResponse
 }
