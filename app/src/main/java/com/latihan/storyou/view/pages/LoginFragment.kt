@@ -5,10 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -16,7 +16,6 @@ import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.latihan.storyou.R
 import com.latihan.storyou.databinding.FragmentLoginBinding
-import com.latihan.storyou.databinding.FragmentOnBoardBinding
 import com.latihan.storyou.view.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -115,8 +114,6 @@ class LoginFragment : Fragment() {
                      if (response.error == false) {
                         try {
                            navController.navigate(R.id.action_loginFragment_to_homeFragment)
-                           Log.d("CheckNavigationLogin", "Ini harusnya tidak diakses karena response" +
-                                 " error true")
                         } catch (e: IllegalArgumentException) {
                            Log.e("Navigate error", "${e.message}")
                         } finally {
@@ -124,7 +121,6 @@ class LoginFragment : Fragment() {
                         }
                      } else {
                         authViewModel.clearLoginResponse()
-                        Log.d("CheckNavigationLogin", "Ini yang diakses jika response error true")
                         Snackbar.make(binding.root, "$message", Snackbar.LENGTH_SHORT).show()
                      }
                   }

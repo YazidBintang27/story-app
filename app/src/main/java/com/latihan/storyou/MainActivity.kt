@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
          val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
          val navController = navHostFragment.navController
          val currentFragmentId = navHostFragment.navController.currentDestination?.id
-         if (currentFragmentId == R.id.homeFragment || currentFragmentId == R.id.profileFragment) {
+         if (currentFragmentId == R.id.homeFragment || currentFragmentId == R.id.profileFragment
+            || currentFragmentId == R.id.onBoardFragment) {
             finish()
          } else {
             navController.popBackStack()

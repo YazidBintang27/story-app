@@ -23,16 +23,18 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/iv_photo"
+                android:id="@+id/iv_item_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="Photo"
                 tools:src="@drawable/image"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:ignore="HardcodedText" />
 
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +47,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,16 +57,16 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:fontFamily="@font/opensans_medium"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_name"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_item_name"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_item_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             android:maxLines="2"
             android:ellipsize="end"

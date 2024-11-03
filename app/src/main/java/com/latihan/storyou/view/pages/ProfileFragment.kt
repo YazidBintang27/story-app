@@ -62,6 +62,7 @@ class ProfileFragment : Fragment() {
       viewLifecycleOwner.lifecycleScope.launch {
          authViewModel.logout()
          authViewModel.isLoggedIn.collect { loggedIn ->
+            Log.d("LogoutStatus", "Is user logged in? $loggedIn")
             if (!loggedIn) {
                navController.navigate(R.id.action_profileFragment_to_onBoardFragment)
                Snackbar.make(binding.root, "Logout Successful", Snackbar.LENGTH_SHORT).show()

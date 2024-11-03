@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:id="@+id/captureImage"
+            android:id="@+id/capture_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/switchCamera"
+            android:id="@+id/rotate_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="Rotate camera"

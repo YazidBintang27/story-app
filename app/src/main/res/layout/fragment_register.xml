@@ -125,7 +125,6 @@
         app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
 
     <TextView
-        android:id="@+id/tv_command_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/or_if_you_already_have_an_account"
