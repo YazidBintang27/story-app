@@ -79,6 +79,7 @@ class AddStoryFragment : Fragment() {
       navController = Navigation.findNavController(view)
       binding.toolbar.setNavigationOnClickListener { navController.navigateUp() }
       binding.btnGallery.setOnClickListener { startGallery() }
+      showImage()
       binding.btnCamera.setOnClickListener {
          if (allPermissionsGranted()) {
             startCameraX()
@@ -91,6 +92,7 @@ class AddStoryFragment : Fragment() {
          if (uri != null) {
             currentImageUri = uri
             showImage()
+            Log.d("CheckCurrentImage", "Check if not null: $currentImageUri")
          }
       }
       binding.buttonAdd.setOnClickListener { uploadStory() }
@@ -116,8 +118,10 @@ class AddStoryFragment : Fragment() {
    }
 
    private fun showImage() {
+      Log.d("CheckShowImage", "Test show image: $currentImageUri")
       currentImageUri?.let {
-         binding.ivPhoto.setImageURI(it)
+         Log.d("CheckShowImage", "Test show image: $currentImageUri")
+         binding.ivPhoto.setImageURI(currentImageUri)
       }
    }
 
@@ -128,7 +132,7 @@ class AddStoryFragment : Fragment() {
    @RequiresApi(Build.VERSION_CODES.Q)
    private fun uploadStory() {
       if (currentImageUri == null) {
-         Snackbar.make(binding.root, "Please choose image first!", Snackbar.LENGTH_SHORT).show()
+         Snackbar.make(binding.root, "Choose image first!", Snackbar.LENGTH_SHORT).show()
       } else {
          val imageFile = uriToFile(currentImageUri!!, requireContext())
          imageFile.reduceFileImage()
