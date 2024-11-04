@@ -1,10 +1,7 @@
 package com.latihan.storyou.view.pages
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,53 +43,7 @@ class RegisterFragment : Fragment() {
       super.onViewCreated(view, savedInstanceState)
       navController = Navigation.findNavController(view)
       binding.btnNavigateLogin.setOnClickListener { navController.navigate(R.id.action_registerFragment_to_loginFragment) }
-      checkEmail()
-      checkPassword()
       register()
-   }
-
-   private fun checkEmail() {
-      binding.edRegisterEmail.addTextChangedListener(object: TextWatcher {
-         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-         }
-
-         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s != null && !isValidEmail(s.toString())) {
-               binding.edRegisterEmail.error = "Invalid email format"
-            } else {
-               binding.edRegisterEmail.error = null
-            }
-         }
-
-         override fun afterTextChanged(s: Editable?) {
-
-         }
-      })
-   }
-
-   private fun isValidEmail(email: String): Boolean {
-      return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-   }
-
-   private fun checkPassword() {
-      binding.edRegisterPassword.addTextChangedListener(object: TextWatcher {
-         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-         }
-
-         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s != null && s.length < 8) {
-               binding.edRegisterPassword.error = "Password must 8 characters"
-            } else {
-               binding.edRegisterPassword.error = null
-            }
-         }
-
-         override fun afterTextChanged(s: Editable?) {
-
-         }
-      })
    }
 
    private fun register() {

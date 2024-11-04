@@ -24,4 +24,6 @@
     <string name="add_post">Add Post</string>
     <string name="created_by_yazid">Created by Yazid⭐</string>
     <string name="change_language">Change Language</string>
+    <string name="validate_email">Invalid email format</string>
+    <string name="validate_password">Password must 8 characters</string>
 </resources>

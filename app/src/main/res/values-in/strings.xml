@@ -24,4 +24,6 @@
     <string name="add_post">Tambah Postingan</string>
     <string name="created_by_yazid">Dibuat oleh Yazid⭐</string>
     <string name="change_language">Ubah Bahasa</string>
+    <string name="validate_email">Format email tidak valid</string>
+    <string name="validate_password">Kata sandi harus 8 karakter</string>
 </resources>

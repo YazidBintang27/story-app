@@ -24,4 +24,6 @@
     <string name="add_post">投稿を追加</string>
     <string name="created_by_yazid">Yazidによって作成されました⭐</string>
     <string name="change_language">言語を変更する</string>
+    <string name="validate_email">無効なメール形式です</string>
+    <string name="validate_password">パスワードは8文字である必要があります</string>
 </resources>

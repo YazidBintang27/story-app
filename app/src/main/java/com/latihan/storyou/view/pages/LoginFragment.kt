@@ -1,10 +1,7 @@
 package com.latihan.storyou.view.pages
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,53 +43,7 @@ class LoginFragment : Fragment() {
       super.onViewCreated(view, savedInstanceState)
       navController = Navigation.findNavController(view)
       binding.btnNavigateRegister.setOnClickListener { navController.navigate(R.id.action_loginFragment_to_registerFragment) }
-      checkEmail()
-      checkPassword()
       login()
-   }
-
-   private fun checkEmail() {
-      binding.edLoginEmail.addTextChangedListener(object: TextWatcher {
-         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-         }
-
-         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s != null && !isValidEmail(s.toString())) {
-               binding.edLoginEmail.error = "Invalid email format"
-            } else {
-               binding.edLoginEmail.error = null
-            }
-         }
-
-         override fun afterTextChanged(s: Editable?) {
-
-         }
-      })
-   }
-
-   private fun isValidEmail(email: String): Boolean {
-      return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-   }
-
-   private fun checkPassword() {
-      binding.edLoginPassword.addTextChangedListener(object: TextWatcher {
-         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-         }
-
-         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s != null && s.length < 8) {
-               binding.edLoginPassword.error = "Password must 8 characters"
-            } else {
-               binding.edLoginPassword.error = null
-            }
-         }
-
-         override fun afterTextChanged(s: Editable?) {
-
-         }
-      })
    }
 
    private fun login() {
