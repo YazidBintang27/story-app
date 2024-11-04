@@ -45,7 +45,8 @@ class AuthPreferences @Inject constructor(
       withContext(Dispatchers.IO) {
          context.datastore.edit { preferences ->
             preferences.remove(TOKEN_KEY)
-            preferences[IS_LOGGED_IN] = false
+            preferences.remove(IS_LOGGED_IN)
+            preferences.remove(LOGIN_RESPONSE_KEY)
          }
       }
    }
