@@ -1,16 +1,15 @@
 [versions]
-agp = "8.7.0"
+agp = "8.7.2"
 cameraView = "1.4.0"
 cameraLifecycle = "1.4.0"
 cameraCamera2 = "1.4.0"
 compiler = "4.14.2"
 converterGson = "2.9.0"
-coreSplashscreen = "1.0.1"
 datastorePreferencesCore = "1.1.1"
 glide = "4.16.0"
 hiltAndroid = "2.49"
 kotlin = "1.9.24"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -18,11 +17,11 @@ appcompat = "1.7.0"
 kotlinxCoroutinesAndroid = "1.7.3"
 libraryNoOp = "4.0.0"
 library = "4.0.0"
-lifecycleRuntimeKtx = "2.8.6"
-lifecycleLivedataKtx = "2.8.6"
+lifecycleRuntimeKtx = "2.8.7"
+lifecycleLivedataKtx = "2.8.7"
 material = "1.12.0"
 activity = "1.9.3"
-constraintlayout = "2.1.4"
+constraintlayout = "2.2.0"
 okhttp = "4.12.0"
 navigationFragmentKtx = "2.8.3"
 navigationUiKtx = "2.8.3"
@@ -33,7 +32,6 @@ androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.r
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraLifecycle" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraView" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesCore" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }

@@ -8,12 +8,13 @@ plugins {
 
 android {
    namespace = "com.latihan.storyou"
-   compileSdk = 34
+   compileSdk = 35
 
    defaultConfig {
       applicationId = "com.latihan.storyou"
       minSdk = 24
-      targetSdk = 34
+      //noinspection EditedTargetSdkVersion
+      targetSdk = 35
       versionCode = 1
       versionName = "1.0"
 
@@ -57,9 +58,6 @@ dependencies {
    implementation(libs.hilt.android)
    ksp(libs.dagger.compiler)
    ksp(libs.hilt.compiler)
-
-   //SplashScreen
-   implementation (libs.androidx.core.splashscreen)
 
    // Retrofit
    implementation(libs.retrofit)
