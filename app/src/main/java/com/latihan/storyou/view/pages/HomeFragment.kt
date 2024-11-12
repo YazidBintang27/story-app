@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.latihan.storyou.R
 import com.latihan.storyou.databinding.FragmentHomeBinding
 import com.latihan.storyou.view.adapter.StoriesAdapter
 import com.latihan.storyou.view.viewmodel.HomeViewModel
@@ -46,6 +47,7 @@ class HomeFragment : Fragment() {
       navController = Navigation.findNavController(view)
       setupAdapter()
       getData()
+      navigateToMaps()
    }
 
    private fun setupAdapter() {
@@ -73,6 +75,12 @@ class HomeFragment : Fragment() {
                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
          }
+      }
+   }
+
+   private fun navigateToMaps() {
+      binding.icMaps.setOnClickListener {
+         navController.navigate(R.id.action_homeFragment_to_mapsFragment)
       }
    }
 

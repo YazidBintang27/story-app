@@ -38,4 +38,6 @@ interface Repository {
    suspend fun getAllStories(token: String): StoriesResponse
 
    suspend fun getDetailStories(token: String, id: String): DetailStoryResponse
+
+   suspend fun getAllStoriesLocation(token: String): StoriesResponse
 }

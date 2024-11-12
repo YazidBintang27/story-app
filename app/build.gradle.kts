@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
    alias(libs.plugins.android.application)
    alias(libs.plugins.kotlin.android)
@@ -19,6 +21,9 @@ android {
       versionName = "1.0"
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      val properties = Properties()
+      properties.load(project.rootProject.file("local.properties").inputStream())
+      buildConfigField("String", "MAPS_API_KEY", properties.getProperty("MAPS_API_KEY"))
    }
 
    buildTypes {
@@ -39,6 +44,7 @@ android {
    }
    buildFeatures {
       viewBinding = true
+      buildConfig = true
    }
 }
 
@@ -91,4 +97,7 @@ dependencies {
    implementation(libs.androidx.camera.camera2)
    implementation(libs.androidx.camera.lifecycle)
    implementation(libs.androidx.camera.view)
+
+   // Google Maps
+   implementation(libs.play.services.maps)
 }

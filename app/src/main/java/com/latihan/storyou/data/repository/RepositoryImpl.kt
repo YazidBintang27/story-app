@@ -53,4 +53,9 @@ class RepositoryImpl @Inject constructor(
       val authHeader = "Bearer $token"
       return apiService.getDetailStories(authHeader, id)
    }
+
+   override suspend fun getAllStoriesLocation(token: String): StoriesResponse {
+      val authHeader = "Bearer $token"
+      return apiService.getAllStoriesLocation(authHeader)
+   }
 }
