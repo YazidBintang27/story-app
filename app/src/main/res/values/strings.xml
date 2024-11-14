@@ -26,4 +26,6 @@
     <string name="change_language">Change Language</string>
     <string name="validate_email">Invalid email format</string>
     <string name="validate_password">Password must 8 characters</string>
+    <string name="add_your_location">Add your location</string>
+    <string name="no_location">No location</string>
 </resources>

@@ -31,13 +31,13 @@ class PostViewModel @Inject constructor(
    private var _isLoading = MutableStateFlow<Boolean?>(null)
    val isLoading: StateFlow<Boolean?> = _isLoading.asStateFlow()
 
-   fun postStories(description: RequestBody, photo: MultipartBody.Part) {
+   fun postStories(description: RequestBody, photo: MultipartBody.Part, lat: RequestBody, lon: RequestBody) {
       viewModelScope.launch {
          authToken.collect { token ->
             token?.let {
                try {
                   _isLoading.value = true
-                  val response = repository.postStories(token, description, photo)
+                  val response = repository.postStories(token, description, photo, lat, lon)
                   _postResponse.value = response
                } catch (e: HttpException) {
                   val errorBody = e.response()?.errorBody()?.string()

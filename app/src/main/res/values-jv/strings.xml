@@ -26,4 +26,6 @@
     <string name="change_language">言語を変更する</string>
     <string name="validate_email">無効なメール形式です</string>
     <string name="validate_password">パスワードは8文字である必要があります</string>
+    <string name="add_your_location">場所を追加してください</string>
+    <string name="no_location">場所がありません</string>
 </resources>

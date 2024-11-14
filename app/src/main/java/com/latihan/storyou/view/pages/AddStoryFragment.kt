@@ -14,12 +14,15 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.latihan.storyou.R
 import com.latihan.storyou.databinding.FragmentAddStoryBinding
@@ -41,7 +44,11 @@ class AddStoryFragment : Fragment() {
    private val binding get() = _binding!!
    private lateinit var navController: NavController
    private var currentImageUri: Uri? = null
+   private lateinit var fusedLocationClient: FusedLocationProviderClient
    private val postViewModel: PostViewModel by viewModels()
+
+   private var lat: Double? = 0.0
+   private var lon: Double? = 0.0
 
    private val requestPermissionLauncher =
       registerForActivityResult(
@@ -77,6 +84,7 @@ class AddStoryFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
       navController = Navigation.findNavController(view)
+      fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
       binding.toolbar.setNavigationOnClickListener { navController.navigateUp() }
       binding.btnGallery.setOnClickListener { startGallery() }
       showImage()
@@ -95,6 +103,7 @@ class AddStoryFragment : Fragment() {
             Log.d("CheckCurrentImage", "Check if not null: $currentImageUri")
          }
       }
+      getCurrentLocation()
       binding.buttonAdd.setOnClickListener { uploadStory() }
    }
 
@@ -137,7 +146,9 @@ class AddStoryFragment : Fragment() {
          val imageFile = uriToFile(currentImageUri!!, requireContext())
          imageFile.reduceFileImage()
          val description = binding.edAddDescription.text.toString()
-         val requestBody = description.toRequestBody("text/plain".toMediaType())
+         val latToRequestBody = lat.toString().toRequestBody("text/plain".toMediaType())
+         val lonToRequestBody = lon.toString().toRequestBody("text/plain".toMediaType())
+         val descriptionToRequestBody = description.toRequestBody("text/plain".toMediaType())
          val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
          val multipartBody = MultipartBody.Part.createFormData(
             "photo",
@@ -145,7 +156,12 @@ class AddStoryFragment : Fragment() {
             requestImageFile
          )
          viewLifecycleOwner.lifecycleScope.launch {
-            postViewModel.postStories(requestBody, multipartBody)
+            postViewModel.postStories(
+               descriptionToRequestBody,
+               multipartBody,
+               latToRequestBody,
+               lonToRequestBody
+            )
             launch {
                postViewModel.isLoading.collectLatest { loading ->
                   if (loading == true) {
@@ -177,6 +193,37 @@ class AddStoryFragment : Fragment() {
                   }
                }
             }
+         }
+      }
+   }
+
+   private fun getCurrentLocation() {
+      binding.switchLocation.setOnCheckedChangeListener { _, isChecked ->
+         if (isChecked) {
+            if (ActivityCompat.checkSelfPermission(
+                  requireContext(),
+                  Manifest.permission.ACCESS_FINE_LOCATION
+               ) != PackageManager.PERMISSION_GRANTED
+            ) {
+               ActivityCompat.requestPermissions(
+                  requireActivity(),
+                  arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                  101
+               )
+               return@setOnCheckedChangeListener
+            }
+
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+               if (location != null) {
+                  lat = location.latitude
+                  lon = location.longitude
+               } else {
+                  Log.e("LocationError", "Cannot find location")
+               }
+            }
+         } else {
+            lat = 0.0
+            lon = 0.0
          }
       }
    }

@@ -75,4 +75,31 @@
         android:fontFamily="@font/opensans_semibold"
         android:textSize="16sp" />
 
+    <ImageView
+        android:id="@+id/iv_location"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="Location logo"
+        android:src="@drawable/location_01_stroke_rounded"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_detail_location"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_description"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tv_detail_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_location"
+        app:layout_constraintTop_toTopOf="@id/iv_location"
+        app:layout_constraintBottom_toBottomOf="@id/iv_location"
+        tools:text="Tangerang, Indonesia"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/opensans_medium"
+        android:textSize="14sp"
+        android:paddingHorizontal="8dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,4 +26,6 @@
     <string name="change_language">Ubah Bahasa</string>
     <string name="validate_email">Format email tidak valid</string>
     <string name="validate_password">Kata sandi harus 8 karakter</string>
+    <string name="add_your_location">Tambahkan lokasi Anda</string>
+    <string name="no_location">Tidak ada lokasi</string>
 </resources>

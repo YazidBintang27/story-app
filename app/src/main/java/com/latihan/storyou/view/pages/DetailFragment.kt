@@ -1,6 +1,9 @@
 package com.latihan.storyou.view.pages
 
+import android.annotation.SuppressLint
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +19,7 @@ import com.latihan.storyou.view.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
@@ -48,6 +52,7 @@ class DetailFragment : Fragment() {
       getData()
    }
 
+   @SuppressLint("SetTextI18n")
    private fun getData() {
       val args = DetailFragmentArgs.fromBundle(arguments as Bundle)
       val id = args.id
@@ -68,6 +73,21 @@ class DetailFragment : Fragment() {
                tvDetailName.text = response?.story?.name
                tvDetailDate.text = formattedDate
                tvDetailDescription.text = response?.story?.description
+               val geoCoder = Geocoder(requireContext(), Locale.getDefault())
+               try {
+                  if (response?.story?.lat != null && response.story.lon != null) {
+                     val addresses = geoCoder.getFromLocation(response.story.lat, response.story.lon, 1)
+                     if (!addresses.isNullOrEmpty()) {
+                        val cityName = addresses[0].subAdminArea
+                        val countryName = addresses[0].countryName
+                        tvDetailLocation.text = "$cityName, $countryName"
+                     }
+                  } else {
+                     tvDetailLocation.text = context?.getString(R.string.no_location)
+                  }
+               } catch (e: IOException) {
+                  Log.e("GeoCoderError", "${e.message}")
+               }
             }
          }
       }
