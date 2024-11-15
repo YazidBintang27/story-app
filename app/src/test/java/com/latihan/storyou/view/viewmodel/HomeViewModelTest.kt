@@ -16,11 +16,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.runTest
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
@@ -31,7 +33,6 @@ class HomeViewModelTest {
    val mainDispatcherRules = MainDispatcherRule()
 
    private lateinit var homeViewModel: HomeViewModel
-   private lateinit var authPreferences: AuthPreferences
 
    @Mock
    private lateinit var repository: Repository
@@ -43,9 +44,9 @@ class HomeViewModelTest {
 
       val flow = MutableStateFlow(pagingData)
 
-      Mockito.`when`(repository.getAllStories(Mockito.anyString())).thenReturn(flow)
+      Mockito.`when`(repository.getAllStories()).thenReturn(flow)
 
-      homeViewModel = HomeViewModel(repository, authPreferences)
+      homeViewModel = HomeViewModel(repository)
 
       val actualStory: PagingData<StoryEntity> = homeViewModel.storiesResponse.getOrAwaitValue()
 
@@ -70,9 +71,9 @@ class HomeViewModelTest {
 
       val expectedFlow = MutableStateFlow<PagingData<StoryEntity>>(data)
 
-      Mockito.`when`(repository.getAllStories(Mockito.anyString())).thenReturn(expectedFlow)
+      Mockito.`when`(repository.getAllStories()).thenReturn(expectedFlow)
 
-      homeViewModel = HomeViewModel(repository, authPreferences)
+      homeViewModel = HomeViewModel(repository)
 
       val actualStory: PagingData<StoryEntity> = homeViewModel.storiesResponse.getOrAwaitValue()
 

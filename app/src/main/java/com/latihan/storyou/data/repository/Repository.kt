@@ -38,7 +38,7 @@ interface Repository {
       lon: RequestBody? = null
    ): PostResponse
 
-   suspend fun getAllStories(token: String): Flow<PagingData<StoryEntity>>
+   suspend fun getAllStories(): Flow<PagingData<StoryEntity>>
 
    suspend fun getDetailStories(token: String, id: String): DetailStoryResponse
 

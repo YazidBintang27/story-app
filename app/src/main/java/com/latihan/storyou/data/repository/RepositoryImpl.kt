@@ -23,7 +23,8 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
    private val apiService: ApiService,
-   private val database: StoryDatabase
+   private val database: StoryDatabase,
+   private val authPreferences: AuthPreferences
 ): Repository {
 
    override suspend fun register(name: String, email: String, password: String): RegisterResponse {
@@ -55,7 +56,13 @@ class RepositoryImpl @Inject constructor(
    }
 
    @OptIn(ExperimentalPagingApi::class)
-   override suspend fun getAllStories(token: String): Flow<PagingData<StoryEntity>> {
+   override suspend fun getAllStories(): Flow<PagingData<StoryEntity>> {
+      var token = ""
+      authPreferences.authToken.collectLatest {
+         it?.let {
+            token = it
+         }
+      }
       return Pager(
          config = PagingConfig(
             pageSize = 5,
