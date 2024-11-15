@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.latihan.storyou.R
-import com.latihan.storyou.data.remote.models.StoriesResponse
+import com.latihan.storyou.data.local.room.StoryEntity
 import com.latihan.storyou.databinding.ItemStoriesBinding
 import com.latihan.storyou.view.pages.HomeFragmentDirections
 import java.io.IOException
@@ -18,16 +20,15 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
-class StoriesAdapter: RecyclerView.Adapter<StoriesAdapter.ViewHolder>() {
+class StoriesAdapter : PagingDataAdapter<StoryEntity, StoriesAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-   private var data: List<StoriesResponse.Story?>? = listOf()
    private lateinit var fragment: Fragment
 
    class ViewHolder(
       private val binding: ItemStoriesBinding
-   ): RecyclerView.ViewHolder(binding.root) {
+   ) : RecyclerView.ViewHolder(binding.root) {
       @SuppressLint("SetTextI18n")
-      fun bind(data: StoriesResponse.Story?, fragment: Fragment) {
+      fun bind(data: StoryEntity?, fragment: Fragment) {
          val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).apply {
             timeZone = TimeZone.getTimeZone("UTC")
          }
@@ -71,21 +72,24 @@ class StoriesAdapter: RecyclerView.Adapter<StoriesAdapter.ViewHolder>() {
       return ViewHolder(binding)
    }
 
-   override fun getItemCount(): Int {
-      return data?.size ?: 0
-   }
-
    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      holder.bind(data?.get(position), fragment)
-   }
-
-   @SuppressLint("NotifyDataSetChanged")
-   fun setData(data: List<StoriesResponse.Story?>?) {
-      this.data = data
-      notifyDataSetChanged()
+      val story = getItem(position)
+      holder.bind(story, fragment)
    }
 
    fun setFragment(fragment: Fragment) {
       this.fragment = fragment
+   }
+
+   companion object {
+      val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
+         override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
+            return oldItem.id == newItem.id
+         }
+
+         override fun areContentsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
+            return oldItem == newItem
+         }
+      }
    }
 }

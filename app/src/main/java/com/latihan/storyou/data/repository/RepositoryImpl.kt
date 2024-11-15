@@ -1,19 +1,29 @@
 package com.latihan.storyou.data.repository
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.latihan.storyou.data.local.datastore.AuthPreferences
+import com.latihan.storyou.data.local.room.StoryDatabase
+import com.latihan.storyou.data.local.room.StoryEntity
+import com.latihan.storyou.data.mediator.StoryRemoteMediator
 import com.latihan.storyou.data.remote.models.DetailStoryResponse
 import com.latihan.storyou.data.remote.models.LoginResponse
 import com.latihan.storyou.data.remote.models.PostResponse
 import com.latihan.storyou.data.remote.models.RegisterResponse
 import com.latihan.storyou.data.remote.models.StoriesResponse
 import com.latihan.storyou.data.remote.service.ApiService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.runBlocking
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
    private val apiService: ApiService,
-   private val authPreferences: AuthPreferences
+   private val database: StoryDatabase
 ): Repository {
 
    override suspend fun register(name: String, email: String, password: String): RegisterResponse {
@@ -44,9 +54,16 @@ class RepositoryImpl @Inject constructor(
       return apiService.postStoriesGuest(description, photo, lat, lon)
    }
 
-   override suspend fun getAllStories(token: String): StoriesResponse {
-      val authHeader = "Bearer $token"
-      return apiService.getAllStories(authHeader)
+   @OptIn(ExperimentalPagingApi::class)
+   override suspend fun getAllStories(token: String): Flow<PagingData<StoryEntity>> {
+      return Pager(
+         config = PagingConfig(
+            pageSize = 5,
+            enablePlaceholders = false
+         ),
+         remoteMediator = StoryRemoteMediator(database, apiService, token),
+         pagingSourceFactory = { database.storyDao().getStories() }
+      ).flow
    }
 
    override suspend fun getDetailStories(token: String, id: String): DetailStoryResponse {

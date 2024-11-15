@@ -1,10 +1,13 @@
 package com.latihan.storyou.data.repository
 
+import androidx.paging.PagingData
+import com.latihan.storyou.data.local.room.StoryEntity
 import com.latihan.storyou.data.remote.models.DetailStoryResponse
 import com.latihan.storyou.data.remote.models.LoginResponse
 import com.latihan.storyou.data.remote.models.PostResponse
 import com.latihan.storyou.data.remote.models.RegisterResponse
 import com.latihan.storyou.data.remote.models.StoriesResponse
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -35,7 +38,7 @@ interface Repository {
       lon: RequestBody? = null
    ): PostResponse
 
-   suspend fun getAllStories(token: String): StoriesResponse
+   suspend fun getAllStories(token: String): Flow<PagingData<StoryEntity>>
 
    suspend fun getDetailStories(token: String, id: String): DetailStoryResponse
 

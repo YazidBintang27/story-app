@@ -55,7 +55,9 @@ interface ApiService {
 
    @GET(ApiConstant.GET_ALL_STORIES_ENDPOINT)
    suspend fun getAllStories(
-      @Header("Authorization") token: String
+      @Header("Authorization") token: String,
+      @Query("page") page: Int,
+      @Query("size") size: Int
    ): StoriesResponse
 
    @GET(ApiConstant.DETAIL_STORIES_ENDPOINT)

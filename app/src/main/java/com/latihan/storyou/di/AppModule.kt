@@ -1,8 +1,11 @@
 package com.latihan.storyou.di
 
 import android.content.Context
+import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.latihan.storyou.data.local.datastore.AuthPreferences
+import com.latihan.storyou.data.local.room.StoryDao
+import com.latihan.storyou.data.local.room.StoryDatabase
 import com.latihan.storyou.data.remote.service.ApiService
 import com.latihan.storyou.utils.ApiConstant
 import dagger.Module
@@ -53,5 +56,21 @@ object AppModule {
    @Singleton
    fun provideAuthPreferences(@ApplicationContext context: Context): AuthPreferences {
       return AuthPreferences(context)
+   }
+
+   @Provides
+   @Singleton
+   fun providesDatabase(@ApplicationContext context: Context): StoryDatabase {
+      return Room.databaseBuilder(
+         context,
+         StoryDatabase::class.java,
+         "story_database"
+      ).build()
+   }
+
+   @Provides
+   @Singleton
+   fun providesDao(database: StoryDatabase): StoryDao {
+      return database.storyDao()
    }
 }

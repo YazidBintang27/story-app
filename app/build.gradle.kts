@@ -56,6 +56,7 @@ dependencies {
    implementation(libs.androidx.activity)
    implementation(libs.androidx.constraintlayout)
    testImplementation(libs.junit)
+   testImplementation(libs.hilt.android.testing)
    androidTestImplementation(libs.androidx.junit)
    androidTestImplementation(libs.androidx.espresso.core)
    implementation(libs.androidx.activity.ktx)
@@ -64,6 +65,7 @@ dependencies {
    implementation(libs.hilt.android)
    ksp(libs.dagger.compiler)
    ksp(libs.hilt.compiler)
+   androidTestImplementation(libs.hilt.android.testing)
 
    // Retrofit
    implementation(libs.retrofit)
@@ -98,6 +100,23 @@ dependencies {
    implementation(libs.androidx.camera.lifecycle)
    implementation(libs.androidx.camera.view)
 
-   // Google Maps
+   // Google Maps and Location
    implementation(libs.play.services.maps)
+   implementation(libs.play.services.location)
+
+   // Paging 3 and Room Database
+   implementation(libs.androidx.room.runtime)
+   ksp(libs.androidx.room.compiler)
+   implementation(libs.androidx.room.ktx)
+   implementation(libs.androidx.paging.runtime)
+   implementation(libs.androidx.room.paging)
+   
+   // Unit Testing
+   testImplementation(libs.androidx.core.testing)
+   testImplementation(libs.kotlinx.coroutines.test)
+   testImplementation(libs.mockito.core)
+   testImplementation(libs.mockito.inline)
+   implementation(libs.core.ktx)
+   testImplementation(libs.junit.jupiter.api)
+   testImplementation(libs.junit.jupiter.engine)
 }
