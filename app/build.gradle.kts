@@ -117,6 +117,4 @@ dependencies {
    testImplementation(libs.mockito.core)
    testImplementation(libs.mockito.inline)
    implementation(libs.core.ktx)
-   testImplementation(libs.junit.jupiter.api)
-   testImplementation(libs.junit.jupiter.engine)
 }
