@@ -3,29 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:padding="16dp">
 
-    <!-- ProgressBar for Loading State -->
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="40dp"
         android:indeterminate="true" />
 
-    <!-- Error Message -->
     <TextView
         android:id="@+id/errorMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="An error occurred" />
+        android:textColor="@color/error"
+        android:text="@string/request_timeout" />
 
-    <!-- Retry Button -->
     <Button
         android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry"
-        android:visibility="gone" />
+        android:text="@string/retry" />
 </LinearLayout>

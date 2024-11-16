@@ -55,10 +55,6 @@ dependencies {
    implementation(libs.material)
    implementation(libs.androidx.activity)
    implementation(libs.androidx.constraintlayout)
-   testImplementation(libs.junit)
-   testImplementation(libs.hilt.android.testing)
-   androidTestImplementation(libs.androidx.junit)
-   androidTestImplementation(libs.androidx.espresso.core)
    implementation(libs.androidx.activity.ktx)
 
    // Dagger Hilt
@@ -117,4 +113,12 @@ dependencies {
    testImplementation(libs.mockito.core)
    testImplementation(libs.mockito.inline)
    implementation(libs.core.ktx)
+   testImplementation(libs.junit)
+   testImplementation(libs.hilt.android.testing)
+
+   // UI Testing
+   androidTestImplementation(libs.androidx.junit)
+   androidTestImplementation(libs.androidx.espresso.core)
+   androidTestImplementation(libs.androidx.lifecycle.livedata.ktx.v271)
+   androidTestImplementation(libs.androidx.core.testing)
 }

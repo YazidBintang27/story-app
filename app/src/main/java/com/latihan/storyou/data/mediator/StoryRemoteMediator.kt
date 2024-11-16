@@ -1,20 +1,24 @@
 package com.latihan.storyou.data.mediator
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.latihan.storyou.data.local.datastore.AuthPreferences
 import com.latihan.storyou.data.local.room.RemoteKeys
 import com.latihan.storyou.data.local.room.StoryDatabase
 import com.latihan.storyou.data.local.room.StoryEntity
 import com.latihan.storyou.data.remote.service.ApiService
+import kotlinx.coroutines.flow.first
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class StoryRemoteMediator (
+class StoryRemoteMediator @Inject constructor (
    private val database: StoryDatabase,
    private val apiService: ApiService,
-   private val token: String
+   private val authPreferences: AuthPreferences
 ): RemoteMediator<Int, StoryEntity>() {
 
    companion object {
@@ -32,16 +36,18 @@ class StoryRemoteMediator (
       val page = when (loadType) {
          LoadType.REFRESH ->{
             val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
+            Log.d("StoryRemoteMediator", "refresh")
             remoteKeys?.nextKey?.minus(1) ?: INITIAL_PAGE_INDEX
          }
          LoadType.PREPEND -> {
             val remoteKeys = getRemoteKeyForFirstItem(state)
-            val prevKey = remoteKeys?.prevKey
-               ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+            Log.d("StoryRemoteMediator", "Prepend")
+            val prevKey = remoteKeys?.prevKey ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
             prevKey
          }
          LoadType.APPEND -> {
             val remoteKeys = getRemoteKeyForLastItem(state)
+            Log.d("StoryRemoteMediator", "Append")
             val nextKey = remoteKeys?.nextKey
                ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
             nextKey
@@ -49,17 +55,22 @@ class StoryRemoteMediator (
       }
 
       try {
-         val response = apiService.getAllStories("Bearer $token", page, state.config.pageSize)
+         Log.d("StoryRemoteMediator", "Start")
+         val token = authPreferences.authToken.first()
+         Log.d("StoryRemoteMediator", "This is $token")
+         val responseData = apiService.getAllStories("Bearer $token", page, state.config.pageSize)
 
-         val endOfPaginationReached = response.listStory.isNullOrEmpty()
+
+         val endOfPaginationReached = responseData.listStory.isNullOrEmpty()
 
          database.withTransaction {
+            Log.d("StoryRemoteMediator", "Transaction")
             if (loadType == LoadType.REFRESH) {
                database.remoteKeysDao().deleteRemoteKeys()
                database.storyDao().deleteAll()
             }
 
-            val keys = response.listStory?.map {
+            val keys = responseData.listStory?.map {
                RemoteKeys(
                   storyId = it?.id.orEmpty(),
                   prevKey = if (page == 1) null else page - 1,
@@ -68,7 +79,7 @@ class StoryRemoteMediator (
             }
             database.remoteKeysDao().insertAll(keys.orEmpty())
 
-            val stories = response.listStory?.map {
+            val stories = responseData.listStory?.map {
                StoryEntity(
                   id = it?.id.orEmpty(),
                   name = it?.name.orEmpty(),
@@ -81,8 +92,10 @@ class StoryRemoteMediator (
             }
             database.storyDao().insertStories(stories.orEmpty())
          }
+         Log.d("StoryRemoteMediator", "Out Transaction")
          return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
       } catch (exception: Exception) {
+         Log.e("StoryRemoteMediator", "Error during API call", exception)
          return MediatorResult.Error(exception)
       }
    }

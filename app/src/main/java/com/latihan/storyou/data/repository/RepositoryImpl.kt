@@ -15,8 +15,6 @@ import com.latihan.storyou.data.remote.models.RegisterResponse
 import com.latihan.storyou.data.remote.models.StoriesResponse
 import com.latihan.storyou.data.remote.service.ApiService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.runBlocking
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -57,18 +55,11 @@ class RepositoryImpl @Inject constructor(
 
    @OptIn(ExperimentalPagingApi::class)
    override suspend fun getAllStories(): Flow<PagingData<StoryEntity>> {
-      var token = ""
-      authPreferences.authToken.collectLatest {
-         it?.let {
-            token = it
-         }
-      }
       return Pager(
          config = PagingConfig(
             pageSize = 5,
-            enablePlaceholders = false
          ),
-         remoteMediator = StoryRemoteMediator(database, apiService, token),
+         remoteMediator = StoryRemoteMediator(database, apiService, authPreferences),
          pagingSourceFactory = { database.storyDao().getStories() }
       ).flow
    }
