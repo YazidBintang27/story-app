@@ -67,8 +67,12 @@ class ProfileFragment : Fragment() {
          authViewModel.isLoggedIn.collect { loggedIn ->
             Log.d("LogoutStatus", "Is user logged in? $loggedIn")
             if (!loggedIn) {
-               navController.navigate(R.id.action_profileFragment_to_onBoardFragment)
-               Snackbar.make(binding.root, "Logout Successful", Snackbar.LENGTH_SHORT).show()
+               try {
+                  navController.navigate(R.id.action_profileFragment_to_onBoardFragment)
+                  Snackbar.make(binding.root, "Logout Successful", Snackbar.LENGTH_SHORT).show()
+               } catch (e: IllegalArgumentException) {
+                  Log.e("ErrorLogout", "${e.message}")
+               }
             } else {
                Snackbar.make(binding.root, "Logout Failed", Snackbar.LENGTH_SHORT).show()
             }

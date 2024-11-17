@@ -1,7 +1,7 @@
 package com.latihan.storyou.utils
 
 object ApiConstant {
-   const val BASE_URL = "https://story-api.dicoding.dev/v1/"
+   var BASE_URL = "https://story-api.dicoding.dev/v1/"
    const val REGISTER_ENDPOINT = "register"
    const val LOGIN_ENDPOINT = "login"
    const val ADD_STORIES_ENDPOINT = "stories"

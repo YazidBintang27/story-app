@@ -59,6 +59,9 @@ dependencies {
 
    // Dagger Hilt
    implementation(libs.hilt.android)
+   implementation(libs.androidx.espresso.idling.resource)
+   implementation(libs.androidx.espresso.intents)
+   implementation(libs.androidx.navigation.testing)
    ksp(libs.dagger.compiler)
    ksp(libs.hilt.compiler)
    androidTestImplementation(libs.hilt.android.testing)
@@ -119,6 +122,8 @@ dependencies {
    // UI Testing
    androidTestImplementation(libs.androidx.junit)
    androidTestImplementation(libs.androidx.espresso.core)
-   androidTestImplementation(libs.androidx.lifecycle.livedata.ktx.v271)
    androidTestImplementation(libs.androidx.core.testing)
+   androidTestImplementation(libs.mockwebserver)
+   androidTestImplementation(libs.okhttp.tls)
+   androidTestImplementation(libs.androidx.fragment.testing)
 }
