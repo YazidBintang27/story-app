@@ -28,4 +28,7 @@
     <string name="validate_password">Kata sandi harus 8 karakter</string>
     <string name="add_your_location">Tambahkan lokasi Anda</string>
     <string name="no_location">Tidak ada lokasi</string>
+    <string name="an_error_occurred">Terjadi kesalahan</string>
+    <string name="retry">Coba lagi</string>
+    <string name="request_timeout">Permintaan Waktu Habis</string>
 </resources>

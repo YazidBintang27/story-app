@@ -26,12 +26,8 @@ class HomeFragment : Fragment() {
 
    private lateinit var binding: FragmentHomeBinding
    private lateinit var navController: NavController
-   private lateinit var storiesAdapter: StoriesAdapter
+   private val storiesAdapter: StoriesAdapter = StoriesAdapter()
    private val homeViewModel: HomeViewModel by viewModels()
-
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-   }
 
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +45,7 @@ class HomeFragment : Fragment() {
       navigateToMaps()
    }
 
-   override fun onResume() {
-      super.onResume()
-      binding.rvStoriesData.smoothScrollToPosition(0)
-   }
-
    private fun getData() {
-      storiesAdapter = StoriesAdapter()
       binding.rvStoriesData.layoutManager = LinearLayoutManager(context)
       binding.rvStoriesData.adapter = storiesAdapter.withLoadStateFooter(
          footer = LoadingStateAdapter {
@@ -78,7 +68,6 @@ class HomeFragment : Fragment() {
             showLoading(false)
             storiesAdapter.setFragment(requireParentFragment())
             storiesAdapter.submitData(pagingData)
-            storiesAdapter.notifyItemChanged(0)
          }
       }
    }

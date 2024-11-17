@@ -28,4 +28,7 @@
     <string name="validate_password">パスワードは8文字である必要があります</string>
     <string name="add_your_location">場所を追加してください</string>
     <string name="no_location">場所がありません</string>
+    <string name="an_error_occurred">エラーが発生しました</string>
+    <string name="retry">再試行</string>
+    <string name="request_timeout">リクエストのタイムアウト</string>
 </resources>

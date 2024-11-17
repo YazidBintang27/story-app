@@ -5,7 +5,6 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.latihan.storyou.DataDummy
 import com.latihan.storyou.MainDispatcherRule
-import com.latihan.storyou.data.local.datastore.AuthPreferences
 import com.latihan.storyou.data.local.room.StoryEntity
 import com.latihan.storyou.data.repository.Repository
 import com.latihan.storyou.getOrAwaitValue
@@ -16,13 +15,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi

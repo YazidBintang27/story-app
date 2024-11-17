@@ -1,7 +1,6 @@
 package com.latihan.storyou
 
 import com.latihan.storyou.data.local.room.StoryEntity
-import com.latihan.storyou.data.remote.models.StoriesResponse
 
 object DataDummy {
    fun generateDummyStoryResponse(): List<StoryEntity> {

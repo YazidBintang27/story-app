@@ -26,10 +26,6 @@ class RegisterFragment : Fragment() {
    private lateinit var navController: NavController
    private val authViewModel: AuthViewModel by viewModels()
 
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-   }
-
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?

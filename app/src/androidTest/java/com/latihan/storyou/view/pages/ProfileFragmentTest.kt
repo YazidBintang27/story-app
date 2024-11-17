@@ -2,7 +2,6 @@ package com.latihan.storyou.view.pages
 
 import android.content.Intent
 import android.view.View
-import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.app.launchActivity
@@ -13,13 +12,11 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.filters.LargeTest
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.latihan.storyou.MainActivity
 import com.latihan.storyou.R
 import com.latihan.storyou.utils.IdlingResources
 import org.junit.After
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
